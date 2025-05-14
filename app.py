@@ -1,0 +1,32 @@
+from flask import Flask, jsonify, request
+from flask_cors import CORS
+
+# Crear la aplicación Flask
+app = Flask(__name__)
+
+# Habilitar CORS para permitir peticiones desde cualquier origen
+CORS(app)
+
+# Ruta principal que devuelve la IP del cliente y una suma sencilla
+@app.route('/api/hello', methods=['GET'])
+def hello_world():
+    # Obtener la IP del cliente
+    client_ip = request.remote_addr
+    # Realizar una suma sencilla
+    suma = 5 + 3
+    return jsonify({
+        "message": "Hello from Flask!",
+        "client_ip": client_ip,
+        "suma": f"5 + 3 = {suma}",
+        "resultado": suma
+    })
+
+# Ruta de inicio como alternativa
+@app.route('/', methods=['GET'])
+def index():
+    return jsonify({"message": "API funcionando. Usa /api/hello para obtener el mensaje"})
+
+# Ejecutar la app si este script es ejecutado directamente
+if __name__ == '__main__':
+    # Modo de depuración activado y permitiendo conexiones desde cualquier IP
+    app.run(host='0.0.0.0', port=5000, debug=True)
