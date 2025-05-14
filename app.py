@@ -29,4 +29,7 @@ def index():
 # Ejecutar la app si este script es ejecutado directamente
 if __name__ == '__main__':
     # Modo de depuración activado y permitiendo conexiones desde cualquier IP
-    app.run(host='0.0.0.0', port=5000, debug=True)
+    # Obtener puerto desde variable de entorno para Heroku o usar 5000 por defecto
+    import os
+    port = int(os.environ.get('PORT', 5000))
+    app.run(host='0.0.0.0', port=port, debug=True)
