@@ -24,7 +24,7 @@ def hello_world():
 # Ruta de inicio como alternativa
 @app.route('/', methods=['GET'])
 def index():
-    return jsonify({"message": "API funcionando. Usa /api/hello para obtener el mensaje"})
+    return jsonify({"message": "API is available. Use /api/hello for the message"})
 
 # Ejecutar la app si este script es ejecutado directamente
 if __name__ == '__main__':
