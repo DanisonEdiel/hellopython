@@ -1,11 +1,20 @@
 name: Deploy to Heroku
 
 on:
+  # Se activa cuando se hace push directo a main/master
   push:
     branches: [ main, master ]
+  
+  # O cuando el workflow de pruebas en PR se completa exitosamente
+  workflow_run:
+    workflows: ["Test Pull Request"]
+    types: [completed]
+    branches: [main, master]
 
 jobs:
   build-and-deploy:
+    # Solo ejecutar si el workflow de pruebas fue exitoso
+    if: github.event_name == 'push' || github.event.workflow_run.conclusion == 'success'
     runs-on: ubuntu-latest
     
     steps:
