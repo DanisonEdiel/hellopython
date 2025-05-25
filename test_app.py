@@ -1,6 +1,7 @@
 import unittest
 from app import app
 
+
 class TestFlaskApp(unittest.TestCase):
     def setUp(self):
         app.config['TESTING'] = True
@@ -19,6 +20,7 @@ class TestFlaskApp(unittest.TestCase):
         self.assertEqual(response.status_code, 200)
         data = response.get_json()
         self.assertIn('message', data)
+
 
 if __name__ == '__main__':
     unittest.main()
